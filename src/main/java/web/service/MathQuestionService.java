@@ -44,9 +44,9 @@ public class MathQuestionService {
      * @return The result of adding number1 and number2, or NaN if inputs are invalid.
      */
     public static double q1Addition(String number1, String number2) {
-        // Check if any input is null or empty
+      
         if (number1 == null || number2 == null || number1.isEmpty() || number2.isEmpty()) {
-            return Double.NaN; // Invalid input, return NaN (Not a Number)
+            return Double.NaN; 
         }
 
         // Parse input strings to double and perform addition
@@ -62,12 +62,11 @@ public class MathQuestionService {
      * @return The result of subtracting number2 from number1, or NaN if inputs are invalid.
      */
     public static double q2Subtraction(String number1, String number2) {
-        // Check if any input is null or empty
         if (number1 == null || number2 == null || number1.isEmpty() || number2.isEmpty()) {
-            return Double.NaN; // Invalid input, return NaN (Not a Number)
+            return Double.NaN; 
         }
 
-        // Parse input strings to double and perform subtraction
+       
         double result = Double.parseDouble(number1) - Double.parseDouble(number2);
         return result;
     }
@@ -80,12 +79,12 @@ public class MathQuestionService {
      * @return The result of multiplying number1 and number2, or NaN if inputs are invalid.
      */
     public static double q3Multiplication(String number1, String number2) {
-        // Check if any input is null or empty
+        
         if (number1 == null || number2 == null || number1.isEmpty() || number2.isEmpty()) {
             return Double.NaN; // Invalid input, return NaN (Not a Number)
         }
 
-        // Parse input strings to double and perform multiplication
+        
         double result = Double.parseDouble(number1) * Double.parseDouble(number2);
         return result;
     }

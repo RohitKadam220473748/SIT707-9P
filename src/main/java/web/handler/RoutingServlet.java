@@ -64,29 +64,32 @@ public class RoutingServlet {
 	}
 
 	@PostMapping("/q1")
-	public RedirectView q1(
-			HttpServletRequest request, 
-			RedirectAttributes redirectAttributes) {
-		System.out.println("q1 form...");
-		String number1 = request.getParameter("number1");
-		String number2 = request.getParameter("number2");
-		String resultUser = request.getParameter("result");
-		
-		double calculatedResult = MathQuestionService.q1Addition(number1, number2);
-		System.out.println(
-				"User result: " + resultUser + ", answer: " + calculatedResult);
-		
-		RedirectView redirectView = null;
+	public RedirectView q1(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	    System.out.println("q1 form...");
+	    String number1 = request.getParameter("number1");
+	    String number2 = request.getParameter("number2");
+	    String resultUser = request.getParameter("result");
+
+	    RedirectView redirectView;
+
+	    double calculatedResult = MathQuestionService.q1Addition(number1, number2);
+	    System.out.println("User result: " + resultUser + ", answer: " + calculatedResult);
+
 	    if (Double.isNaN(calculatedResult)) {
-	        redirectView = new RedirectView("/q1", true); 
-	    } else if (calculatedResult == Double.valueOf(resultUser)) {
-	        redirectView = new RedirectView("/q2", true);
-	    } else {
 	        redirectView = new RedirectView("/q1", true);
-	        redirectAttributes.addFlashAttribute("message", "Wrong answer, try again.");
-	    }       
+	        redirectAttributes.addFlashAttribute("message", "Please provide values for both numbers.");
+	    } else {
+	        if (calculatedResult == Double.parseDouble(resultUser)) {
+	            redirectView = new RedirectView("/q2", true);
+	        } else {
+	            redirectView = new RedirectView("/q1", true);
+	            redirectAttributes.addFlashAttribute("message", "Wrong answer, try again.");
+	        }
+	    }
 	    return redirectView;
-	}	
+	}
+
+
 	
 
 	@GetMapping("/q2")
@@ -98,23 +101,27 @@ public class RoutingServlet {
 
 	@PostMapping("/q2")
 	public RedirectView q2(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		System.out.println("q2 form...");
-		String number1 = request.getParameter("number1");
-		String number2 = request.getParameter("number2");
-		String resultUser = request.getParameter("result");
-		
-		double calculatedResult = MathQuestionService.q2Subtraction(number1, number2);
-		System.out.println("User result: " + resultUser + ", answer: " + calculatedResult);
-		
-		RedirectView redirectView = null;
+	    System.out.println("q2 form...");
+	    String number1 = request.getParameter("number1");
+	    String number2 = request.getParameter("number2");
+	    String resultUser = request.getParameter("result");
+
+	    RedirectView redirectView;
+
+	    double calculatedResult = MathQuestionService.q2Subtraction(number1, number2);
+	    System.out.println("User result: " + resultUser + ", answer: " + calculatedResult);
+
 	    if (Double.isNaN(calculatedResult)) {
-	        redirectView = new RedirectView("/q2", true); 
-	    } else if (calculatedResult == Double.valueOf(resultUser)) {
-	        redirectView = new RedirectView("/q3", true);
-	    } else {
 	        redirectView = new RedirectView("/q2", true);
-	        redirectAttributes.addFlashAttribute("message", "Wrong answer, try again.");
-	    }       
+	        redirectAttributes.addFlashAttribute("message", "Please provide values for both numbers.");
+	    } else {
+	        if (calculatedResult == Double.parseDouble(resultUser)) {
+	            redirectView = new RedirectView("/q3", true);
+	        } else {
+	            redirectView = new RedirectView("/q2", true);
+	            redirectAttributes.addFlashAttribute("message", "Wrong answer, try again.");
+	        }
+	    }
 	    return redirectView;
 	}	
 	
@@ -126,30 +133,30 @@ public class RoutingServlet {
 	}	
 	
 	@PostMapping("/q3")
-	public RedirectView q3(
-	        HttpServletRequest request, 
-	        RedirectAttributes redirectAttributes) {
+	public RedirectView q3(HttpServletRequest request, RedirectAttributes redirectAttributes) {
 	    System.out.println("q3 form...");
 	    String number1 = request.getParameter("number1");
 	    String number2 = request.getParameter("number2");
 	    String resultUser = request.getParameter("result");
 
-	    // Proceed with the calculation if inputs are valid
-	    double calculatedResult = MathQuestionService.q3Multiplication(number1, number2);
-	    System.out.println(
-	            "User result: " + resultUser + ", answer: " + calculatedResult);
+	    RedirectView redirectView;
 
-	    RedirectView redirectView = null;
+	    double calculatedResult = MathQuestionService.q3Multiplication(number1, number2);
+	    System.out.println("User result: " + resultUser + ", answer: " + calculatedResult);
+
 	    if (Double.isNaN(calculatedResult)) {
-	        redirectView = new RedirectView("/q3", true); 
-	    } else if (calculatedResult == Double.valueOf(resultUser)) {
-	        redirectView = new RedirectView("/success", true);
-	    } else {
 	        redirectView = new RedirectView("/q3", true);
-	        redirectAttributes.addFlashAttribute("message", "Wrong answer, try again.");
-	    }       
+	        redirectAttributes.addFlashAttribute("message", "Please provide values for both numbers.");
+	    } else {
+	        if (calculatedResult == Double.parseDouble(resultUser)) {
+	        	 redirectView = new RedirectView("/q3", true);
+	            redirectAttributes.addFlashAttribute("message", "Congrats all answers are correct.");
+	        } else {
+	            redirectView = new RedirectView("/q3", true);
+	            redirectAttributes.addFlashAttribute("message", "Wrong answer, try again.");
+	        }
+	    }
 	    return redirectView;
-	    
 	}
 
 }
