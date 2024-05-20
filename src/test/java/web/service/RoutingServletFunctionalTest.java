@@ -157,7 +157,7 @@ public class RoutingServletFunctionalTest {
 
     }
         @Test
-        public void testloginSuccessandfirstquestionansswerblank() {
+        public void testloginSuccessandfirstquestionansswerempty() {
     	
     	System.setProperty("webdriver.chrome.driver", "C:/Users/Rohit Kadam/Downloads/chromedriver-win64/chromedriver.exe");
         WebDriver driver = new ChromeDriver();		
